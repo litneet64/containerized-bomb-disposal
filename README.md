@@ -1,7 +1,5 @@
 # Containerized Bomb Disposal
 
----
-
 ## Introduction
 
 Set of dockerfiles meant for throw-away instances that achieve a singular purpose: to *"safely"* interact (run, play, unzip, etc) with programs or files without the need of a full VM to avoid compromise of the host machine.
@@ -15,7 +13,7 @@ Set of dockerfiles meant for throw-away instances that achieve a singular purpos
 
 ## Motivation
 
-Example RCE, DirTrav CVEs like those from  `7zip` ([CVE-2016-2334](https://nvd.nist.gov/vuln/detail/CVE-2016-2334), [CVE-2018-10115](https://nvd.nist.gov/vuln/detail/CVE-2018-10115)), `gzip` ([CVE-2004-0603](https://nvd.nist.gov/vuln/detail/CVE-2004-0603), [CVE-2010-0001CVE-2010-0001](https://nvd.nist.gov/vuln/detail/CVE-2010-0001)), `bzip2` ([CVE-2011-4089](https://nvd.nist.gov/vuln/detail/CVE-2011-4089)), `unrar` ([CVE-2017-14120](https://nvd.nist.gov/vuln/detail/CVE-2017-14120)), `vlc` ([CVE-2019-5439](https://nvd.nist.gov/vuln/detail/CVE-2019-5439)), `libreoffice` ([CVE-2018-16858](https://nvd.nist.gov/vuln/detail/CVE-2018-16858)) and others show that being always *"on-edge"* with the latest vulns and patches **while trying to get things done** is not always that simple, as other vulns like this could exist without the user's awareness at any given moment.
+Example RCE, DirTrav CVEs like those from  `7zip` ([CVE-2016-2334](https://nvd.nist.gov/vuln/detail/CVE-2016-2334), [CVE-2018-10115](https://nvd.nist.gov/vuln/detail/CVE-2018-10115)), `gzip` ([CVE-2004-0603](https://nvd.nist.gov/vuln/detail/CVE-2004-0603), [CVE-2010-0001](https://nvd.nist.gov/vuln/detail/CVE-2010-0001)), `bzip2` ([CVE-2011-4089](https://nvd.nist.gov/vuln/detail/CVE-2011-4089)), `unrar` ([CVE-2017-14120](https://nvd.nist.gov/vuln/detail/CVE-2017-14120)), `vlc` ([CVE-2019-5439](https://nvd.nist.gov/vuln/detail/CVE-2019-5439)), `libreoffice` ([CVE-2018-16858](https://nvd.nist.gov/vuln/detail/CVE-2018-16858)) and others show that being always *"on-edge"* with the latest vulns and patches **while trying to get things done** is not always that simple, as other vulns like this could exist without the user's awareness at any given moment.
 
 Besides possible unknown vulns and CVE's there's also the problem related to macros on *xlsx spreadsheets*, *docx documents*, etc. which are often passed around on e-mails (that could be work related), and we need to open them or execute those macros (for any given reason) but we just don't have the time for checks or giving it a second thought until it's already too late and it ends up blowing in our face.
 
@@ -33,7 +31,7 @@ Its main purpose is for decompressing/compressing files that sometimes require s
 * `unar`
 * `unrar`
 
-##### Usage
+#### Usage
 
 We need to have our data that's going to be compressed/decompressed on a specific folder that contains those files only, we'll call it here as `zips_tmp/`.
 
