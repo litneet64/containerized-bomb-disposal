@@ -73,18 +73,6 @@ Its main purpose is for decompressing/compressing files that sometimes require s
 
 We need to have our data that's going to be compressed/decompressed on a specific folder that contains those files only, we'll call it here as `zips_tmp/`.
 
-For building:
-
-```bash
-$ podman build -t zipperbox -f zipper.Dockerfile .
-```
-
-Or just pulling:
-
-```bash
-$ podman pull litneet64/zipperbox
-```
-
 Setting correct permissions for `zips_tmp/`:
 
 ```bash
@@ -96,7 +84,7 @@ Then running it as:
 ```bash
 $ podman run -it --rm -v ./zips_tmp:/zip_data \
         --userns=auto:uidmapping=$UID:1000:1 \
-          localhost/zipperbox {COMMAND YOU WANT TO RUN}
+          litneet64/zipperbox {COMMAND YOU WANT TO RUN}
 ```
 where `{COMMAND YOU WANT TO RUN}` can be empty (for a bash shell inside the container) or anything like `gzip -d my_files.gz`, `unar my_videos.zip`, `7z x other_files.7z`.
 
@@ -110,19 +98,6 @@ It **requires** that you have any VNC client, such as `vncviewer` and the likes.
 
 Our office files should be on the dir `off_data/` for these examples.
 
-For building:
-
-```bash
-$ podman build -t officebox -f libreoffice.Dockerfile .
-```
-
-Or just pulling:
-
-```bash
-$ podman pull litneet64/officebox
-```
-
-
 Setting correct permissions for `off_data/`:
 
 ```bash
@@ -135,7 +110,7 @@ Then running it as:
 $ podman run -d --rm -v ./off_data:/office_data \
         --userns=auto:uidmapping=$UID:1000:1 \
         -p 127.0.0.1:5900:5900 \
-          localhost/officebox {GEOMETRY}
+          litneet64/officebox {GEOMETRY}
 ```
 
 Where `{GEOMETRY}` represents the resolution for the VNC server (e.g: `1920x1080`), if left empty then the default resolution `1440x1080` (4:3 ratio) is used.
