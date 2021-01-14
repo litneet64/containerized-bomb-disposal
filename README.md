@@ -13,6 +13,7 @@ Set of dockerfiles meant for throw-away instances that achieve a singular purpos
 4. [Before Starting](#before-starting)
 5. [Images](#images)
    * [ZipperBox](#zipperbox)
+   * [OfficeBox](#officebox)
 6. [Common Problems](#common-problems)
 
 ## Motivation
@@ -90,6 +91,47 @@ $ podman run -it --rm -v ./zips_tmp:/zip_data \
           localhost/zipperbox {COMMAND YOU WANT TO RUN}
 ```
 where `{COMMAND YOU WANT TO RUN}` can be empty (for a bash shell inside the container) or anything like `gzip -d my_files.gz`, `unar my_videos.zip`, `7z x other_files.7z`.
+
+### OfficeBox
+
+This box's main purpose is opening common Office files (`.xlsx`, `.docx`, `.pptx`, etc) so that  any existent macro can be "fired" without us having to worry about the effects of the code (or if it was actually malicious), as it will run inside our _sandbox_.
+
+It **requires** that you have any VNC client, such as `vncviewer` and the likes.
+
+#### Usage
+
+Our office files should be on the dir `off_data/` for these examples.
+
+For building:
+
+```bash
+$ podman build -t officebox -f libreoffice.Dockerfile .
+```
+
+You'll need to set up a password for the VNC server when asked. This will be used when connecting with any VNC client.
+
+Setting correct permissions for `off_data/`:
+
+```bash
+$ podman unshare chown -R 1000:1000 off_data/
+```
+
+Then running it as:
+
+```bash
+$ podman run -d --rm -v ./off_data:/office_data \
+        --userns=auto:uidmapping=$UID:1000:1 \
+        -p 127.0.0.1:5900:5900 \
+          localhost/officebox {GEOMETRY}
+```
+
+Where `{GEOMETRY}` represents the resolution for the VNC server (e.g: `1920x1080`), if left empty then the default resolution `1440x1080` (4:3 ratio) is used.
+
+Finally, you can connect to and interact with it doing:
+
+```bash
+$ vncviewer localhost:5900
+```
 
 
 ## Common Problems
