@@ -108,8 +108,6 @@ For building:
 $ podman build -t officebox -f libreoffice.Dockerfile .
 ```
 
-You'll need to set up a password for the VNC server when asked. This will be used when connecting with any VNC client.
-
 Setting correct permissions for `off_data/`:
 
 ```bash
@@ -133,6 +131,7 @@ Finally, you can connect to and interact with it doing:
 $ vncviewer localhost:5900
 ```
 
+**NOTE**: You'll be asked for a password when connecting, this one is set up as `zipperpass` as default at build time.
 
 ## Common Problems
 
