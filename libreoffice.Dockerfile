@@ -18,7 +18,7 @@ RUN apt update && apt install -y x11vnc xvfb \
 USER officer
 
 WORKDIR $USER_DIR
-RUN x11vnc -storepasswd
+RUN mkdir ~/.vnc && x11vnc -storepasswd zipperpass ~/.vnc/passwd
 RUN echo "libreoffice" >> ~/.bashrc
 
 # default resolution: based on HDV 1080i (4:3)
