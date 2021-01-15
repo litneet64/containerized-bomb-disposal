@@ -1,6 +1,6 @@
 # Containerized Bomb Disposal
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/zipperbox?label=zipperbox%20docker%20build) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/officebox?label=officebox%20docker%20build)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/zipperbox?label=zipperbox%20docker%20build) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/officebox?label=officebox%20docker%20build) ![GitHub](https://img.shields.io/github/license/litneet64/containerized-bomb-disposal) ![GitHub top language](https://img.shields.io/github/languages/top/litneet64/containerized-bomb-disposal)
 
 ## Introduction
 
@@ -56,7 +56,7 @@ Note that every image here could have used the `COPY` command in the *Dockerfile
 
 
 ## Images
-### ZipperBox ![](https://img.shields.io/docker/cloud/build/litneet64/zipperbox) ![](https://img.shields.io/docker/cloud/automated/litneet64/zipperbox)
+### ZipperBox ![](https://img.shields.io/docker/cloud/build/litneet64/zipperbox) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/litneet64/zipperbox) ![](https://img.shields.io/docker/cloud/automated/litneet64/zipperbox)
 
 Its main purpose is for decompressing/compressing files that sometimes require specific programs, like `unar` or `7za` for `.7z` *part files*, `lsar` for listing archives not yet *fully-downloaded* or just the plain old `gzip`. Most common compression algorithms/programs are included on this image:
 
@@ -88,7 +88,7 @@ $ podman run -it --rm -v ./zips_tmp:/zip_data \
 ```
 where `{COMMAND YOU WANT TO RUN}` can be empty (for a bash shell inside the container) or anything like `gzip -d my_files.gz`, `unar my_videos.zip`, `7z x other_files.7z`.
 
-### OfficeBox ![](https://img.shields.io/docker/cloud/build/litneet64/officebox) ![](https://img.shields.io/docker/cloud/automated/litneet64/officebox)
+### OfficeBox ![](https://img.shields.io/docker/cloud/build/litneet64/officebox) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/litneet64/officebox) ![](https://img.shields.io/docker/cloud/automated/litneet64/officebox)
 
 This box's main purpose is opening common Office files (`.xlsx`, `.docx`, `.pptx`, etc) so that  any existent macro can be "fired" without us having to worry about the effects of the code (or if it was actually malicious), as it will run inside our _sandbox_.
 
