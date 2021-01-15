@@ -1,5 +1,7 @@
 # Containerized Bomb Disposal
 
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/zipperbox?label=zipperbox%20docker%20build) ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/litneet64/officebox?label=officebox%20docker%20build) ![GitHub](https://img.shields.io/github/license/litneet64/containerized-bomb-disposal) ![GitHub top language](https://img.shields.io/github/languages/top/litneet64/containerized-bomb-disposal)
+
 ## Introduction
 
 Set of dockerfiles meant for throw-away instances that achieve a singular purpose: to *"safely"* interact (run, play, unzip, etc) with programs or files without the need of a full VM to avoid compromise of the host machine.
@@ -54,7 +56,7 @@ Note that every image here could have used the `COPY` command in the *Dockerfile
 
 
 ## Images
-### ZipperBox
+### ZipperBox ![](https://img.shields.io/docker/cloud/build/litneet64/zipperbox) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/litneet64/zipperbox) ![](https://img.shields.io/docker/cloud/automated/litneet64/zipperbox)
 
 Its main purpose is for decompressing/compressing files that sometimes require specific programs, like `unar` or `7za` for `.7z` *part files*, `lsar` for listing archives not yet *fully-downloaded* or just the plain old `gzip`. Most common compression algorithms/programs are included on this image:
 
@@ -71,12 +73,6 @@ Its main purpose is for decompressing/compressing files that sometimes require s
 
 We need to have our data that's going to be compressed/decompressed on a specific folder that contains those files only, we'll call it here as `zips_tmp/`.
 
-For building:
-
-```bash
-$ podman build -t zipperbox -f zipper.Dockerfile .
-```
-
 Setting correct permissions for `zips_tmp/`:
 
 ```bash
@@ -88,11 +84,11 @@ Then running it as:
 ```bash
 $ podman run -it --rm -v ./zips_tmp:/zip_data \
         --userns=auto:uidmapping=$UID:1000:1 \
-          localhost/zipperbox {COMMAND YOU WANT TO RUN}
+          litneet64/zipperbox {COMMAND YOU WANT TO RUN}
 ```
 where `{COMMAND YOU WANT TO RUN}` can be empty (for a bash shell inside the container) or anything like `gzip -d my_files.gz`, `unar my_videos.zip`, `7z x other_files.7z`.
 
-### OfficeBox
+### OfficeBox ![](https://img.shields.io/docker/cloud/build/litneet64/officebox) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/litneet64/officebox) ![](https://img.shields.io/docker/cloud/automated/litneet64/officebox)
 
 This box's main purpose is opening common Office files (`.xlsx`, `.docx`, `.pptx`, etc) so that  any existent macro can be "fired" without us having to worry about the effects of the code (or if it was actually malicious), as it will run inside our _sandbox_.
 
@@ -101,12 +97,6 @@ It **requires** that you have any VNC client, such as `vncviewer` and the likes.
 #### Usage
 
 Our office files should be on the dir `off_data/` for these examples.
-
-For building:
-
-```bash
-$ podman build -t officebox -f libreoffice.Dockerfile .
-```
 
 Setting correct permissions for `off_data/`:
 
@@ -120,7 +110,7 @@ Then running it as:
 $ podman run -d --rm -v ./off_data:/office_data \
         --userns=auto:uidmapping=$UID:1000:1 \
         -p 127.0.0.1:5900:5900 \
-          localhost/officebox {GEOMETRY}
+          litneet64/officebox {GEOMETRY}
 ```
 
 Where `{GEOMETRY}` represents the resolution for the VNC server (e.g: `1920x1080`), if left empty then the default resolution `1440x1080` (4:3 ratio) is used.
